@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+    <!-- service implemention bean -->
+    <bean id="helloServiceImpl" class="motan.HelloServiceImpl"/>
+    <!-- exporting service by Motan -->
+    <!--<motan:service interface="motan.HelloService" ref="helloServiceImpl" export="8002"/>-->
+    <motan:service interface="motan.HelloService" ref="helloServiceImpl" registry="my_zookeeper" export="8002" />
+    <!--zookeeper-->
+    <motan:registry regProtocol="zookeeper" name="my_zookeeper" address="localhost:2181"/>
+</beans>
